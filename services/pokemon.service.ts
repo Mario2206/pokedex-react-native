@@ -1,6 +1,7 @@
 import { PokemonModel } from '../models/pokemon.model'
 import axios from '../helpers/axios.helper'
 import originalAxios from 'axios'
+import { convertToPokemonModel } from '../helpers/model-converter.helper'
 
 export function getPokemons(): Promise<PokemonModel[]> {
     return axios
@@ -20,12 +21,7 @@ export function getPokemonByUrl(url: string): Promise<PokemonModel> {
     return originalAxios
         .get(url)
         .then((res) => res.data)
-        .then((pokemon) => ({
-            sprites: pokemon.sprites,
-            name: pokemon.name,
-            id: pokemon.id,
-            types: pokemon.types.map((item: any) => item.type.name),
-        }))
+        .then((pokemon) => convertToPokemonModel(pokemon))
 }
 
 //export function getPokemonById(): PokemonModel {}

@@ -1,15 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import PokemonList from './containers/pokemon-list.container'
+import 'react-native-gesture-handler'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import SearchContainer from './containers/search.container'
+import MainNavigation from './navigation/main.navigation'
 
 export default function App() {
     return (
         <Provider store={store}>
-            <SearchContainer />
-            <PokemonList />
+            <MainNavigation />
         </Provider>
     )
 }
