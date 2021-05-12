@@ -1,23 +1,39 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { getPokemons } from '../services/pokemon.service'
 import {
     pokemonListLoading,
     setPokemonList,
 } from '../redux/slices/pokemon-list.slice'
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import PokemonList from '../components/pokemon-list.component'
+import { GetServiceType } from '../services/types/get.service.type'
+import { PokemonModel } from '../models/pokemon.model'
+import {
+    getPokemonPageFromState,
+    getPokemonsFromState,
+} from '../redux/selectors/pokemon.selector'
+import { useAppDispatch } from '../redux/hooks'
 
-export default function PokemonListContainer() {
+interface PokemonListContainerProps {
+    pokemonService: GetServiceType<PokemonModel>
+}
+
+export default function PokemonListContainer({
+    pokemonService,
+}: PokemonListContainerProps) {
     const dispatch = useAppDispatch()
-    const pokemons = useAppSelector((state) => state.pokemonList.pokemons)
+    const pokemons = getPokemonsFromState()
+    const page = getPokemonPageFromState()
 
     useEffect(() => {
         dispatch(pokemonListLoading())
-        getPokemons().then((pokemons) => {
+        pokemonService.getAll().then((pokemons) => {
             dispatch(setPokemonList(pokemons))
         })
     }, [])
 
-    return <PokemonList pokemons={pokemons} />
+    function populatePokemonList() {
+        pokemonService.getAll(page * 20, 20)
+    }
+
+    return <PokemonList pokemons={pokemons} onEndScroll={populatePokemonList} />
 }

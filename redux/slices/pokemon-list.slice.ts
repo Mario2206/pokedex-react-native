@@ -5,6 +5,7 @@ import { PokemonState } from '../types/state.type'
 const initialState: PokemonState = {
     pokemons: [] as PokemonModel[],
     isLoading: false,
+    page: 0,
 }
 
 export const pokemonListSlice = createSlice({
@@ -21,8 +22,19 @@ export const pokemonListSlice = createSlice({
         clearPokemonList: (state, action) => {
             state.pokemons = []
         },
+        incrementPage: (state) => {
+            state.page++
+        },
+        cleanPage: (state) => {
+            state.page = 0
+        },
     },
 })
 
-export const { setPokemonList, clearPokemonList, pokemonListLoading } =
-    pokemonListSlice.actions
+export const {
+    setPokemonList,
+    clearPokemonList,
+    pokemonListLoading,
+    incrementPage,
+    cleanPage,
+} = pokemonListSlice.actions
