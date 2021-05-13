@@ -1,3 +1,5 @@
+import { POKE_TYPES } from '../style/color.style'
+
 export interface PokemonSprite {
     back_female: string
     back_shiny_female: string
@@ -9,9 +11,14 @@ export interface PokemonSprite {
     front_shiny: string
 }
 
-export interface PokemonModel {
+export interface PokemonPreviewModel {
     name: string
     id: number
     sprites: PokemonSprite
-    types: string[]
+    types: Array<keyof typeof POKE_TYPES.COLORS>
+    url: string
+}
+
+export interface PokemonModel extends PokemonPreviewModel {
+    description?: string
 }

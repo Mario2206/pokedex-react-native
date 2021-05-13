@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PokemonModel } from '../../models/pokemon.model'
-import { PokemonState } from '../types/state.type'
+import { PokemonListState } from '../types/state.type'
 
-const initialState: PokemonState = {
+const initialState: PokemonListState = {
     pokemons: [] as PokemonModel[],
     isLoading: false,
     page: 0,
@@ -12,9 +12,9 @@ export const pokemonListSlice = createSlice({
     name: 'pokemonList',
     initialState,
     reducers: {
-        setPokemonList: (state, action: PayloadAction<PokemonModel[]>) => {
+        addToPokemonList: (state, action: PayloadAction<PokemonModel[]>) => {
             state.isLoading = false
-            state.pokemons = action.payload
+            state.pokemons = [...state.pokemons, ...action.payload]
         },
         pokemonListLoading: (state) => {
             state.isLoading = true
@@ -32,7 +32,7 @@ export const pokemonListSlice = createSlice({
 })
 
 export const {
-    setPokemonList,
+    addToPokemonList,
     clearPokemonList,
     pokemonListLoading,
     incrementPage,

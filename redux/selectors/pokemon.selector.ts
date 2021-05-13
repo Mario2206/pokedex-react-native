@@ -6,3 +6,9 @@ export const getPokemonsFromState = (): PokemonModel[] =>
 
 export const getPokemonPageFromState = (): number =>
     useAppSelector((state) => state.pokemonList.page)
+
+export const getPokemonLoadingFromState = (): boolean =>
+    useAppSelector((state) => state.pokemonList.isLoading)
+
+export const getPokemonFromState = (): PokemonModel | undefined =>
+    useAppSelector((state) => state.pokemon.pokemon)

@@ -9,7 +9,7 @@ export const ELEMENT_ICONS = {
     dragon: require('./elements/dragon.svg').default,
     electric: require('./elements/electric.svg').default,
     fairy: require('./elements/fairy.svg').default,
-    fight: require('./elements/fight.svg').default,
+    fighting: require('./elements/fighting.svg').default,
     fire: require('./elements/fire.svg').default,
     flying: require('./elements/flying.svg').default,
     ghost: require('./elements/ghost.svg').default,

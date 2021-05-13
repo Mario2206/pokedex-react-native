@@ -1,20 +1,22 @@
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, GestureResponderEvent, StyleSheet, View } from 'react-native'
 import PokemonItem from './pokemon-item.component'
-import { PokemonModel } from '../models/pokemon.model'
-import { detectScrollToBottom } from '../helpers/scroll.helper'
+import { PokemonModel, PokemonPreviewModel } from '../../models/pokemon.model'
+import { detectScrollToBottom } from '../../helpers/scroll.helper'
 
 interface PokemonListProps {
     pokemons: PokemonModel[]
     onEndScroll: () => void
+    onClickItem: (pokemon: PokemonModel) => void
 }
 
 export default function PokemonListView({
     pokemons,
     onEndScroll,
+    onClickItem,
 }: PokemonListProps) {
     const RenderItem = ({ item }: { item: PokemonModel }) => (
-        <PokemonItem pokemon={item} />
+        <PokemonItem pokemon={item} onPress={() => onClickItem(item)} />
     )
 
     return (
@@ -22,7 +24,7 @@ export default function PokemonListView({
             <FlatList
                 data={pokemons}
                 renderItem={RenderItem}
-                keyExtractor={(item) => item.name}
+                keyExtractor={(item) => String(item.id)}
                 onScroll={detectScrollToBottom(onEndScroll)}
             />
         </View>

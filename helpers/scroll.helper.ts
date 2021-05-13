@@ -6,7 +6,7 @@ export function detectScrollToBottom(action: () => void) {
         const contentSizeHeight = nativeEvent.contentSize.height
         const layoutMeasure = nativeEvent.layoutMeasurement.height
 
-        if (y + layoutMeasure >= contentSizeHeight) {
+        if (y + layoutMeasure >= contentSizeHeight * 0.9) {
             action()
         }
     }

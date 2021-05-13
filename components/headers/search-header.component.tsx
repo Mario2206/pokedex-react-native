@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import { COLORS } from '../style/color.style'
-import { FONT_SIZES } from '../style/size.style'
+import { COLORS } from '../../style/color.style'
+import { FONT_SIZES } from '../../style/size.style'
 
 //@ts-ignore
-import SearchLogo from '../assets/search.svg'
+import SearchLogo from '../../assets/search.svg'
 
 export default function SearchHeaderComponent() {
     return (

@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { POKE_TYPES } from '../style/color.style'
+import { POKE_TYPES } from '../../style/color.style'
 import { Dimensions } from 'react-native'
-import { ELEMENT_ICONS } from '../assets/icons.asset'
+import { ELEMENT_ICONS } from '../../assets/icons.asset'
 
 interface TypeBadgeProps {
     type: keyof typeof POKE_TYPES.COLORS
@@ -11,6 +11,13 @@ interface TypeBadgeProps {
 
 export default function TypeBadge({ type }: TypeBadgeProps) {
     const Logo = ELEMENT_ICONS[type]
+    const gradient = POKE_TYPES.GRADIENTS[type]
+    const color = POKE_TYPES.COLORS[type]
+
+    if (!Logo || !gradient || !color) {
+        return null
+    }
+
     return (
         <LinearGradient
             colors={POKE_TYPES.GRADIENTS[type]}
