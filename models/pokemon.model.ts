@@ -17,6 +17,7 @@ export interface PokemonPreviewModel {
     sprites: PokemonSprite
     types: Array<keyof typeof POKE_TYPES.COLORS>
     url: string
+    species: { url: string; name: string }
 }
 
 export interface PokemonModel extends PokemonPreviewModel {

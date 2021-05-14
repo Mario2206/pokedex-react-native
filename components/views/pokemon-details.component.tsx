@@ -14,6 +14,7 @@ interface PokemonDetailsComponentProps {
 export default function PokemonDetailsComponent({
     pokemon,
 }: PokemonDetailsComponentProps) {
+    console.log(pokemon.types)
     return (
         <LinearGradient
             style={styles.container}
