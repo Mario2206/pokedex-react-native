@@ -1,4 +1,5 @@
 import { POKE_TYPES } from '../style/color.style'
+import { LanguageType } from './shared.model'
 
 export interface PokemonSprite {
     back_female: string
@@ -11,15 +12,33 @@ export interface PokemonSprite {
     front_shiny: string
 }
 
+export interface PokemonSpecies {
+    names: Array<{ name: string; language: LanguageType }>
+    flavor_text_entries: Array<{ flavor_text: string; language: LanguageType }>
+    url: string
+}
+
+export interface PokemonType {
+    name: keyof typeof POKE_TYPES.COLORS
+    url: string
+    display_name: string
+}
+
+export interface PokemonStat {
+    effort: number
+    base_stat: number
+    stat: { url: string; name: string }
+}
+
 export interface PokemonPreviewModel {
     name: string
     id: number
     sprites: PokemonSprite
-    types: Array<keyof typeof POKE_TYPES.COLORS>
+    types: PokemonType[]
     url: string
-    species: { url: string; name: string }
+    species: PokemonSpecies
 }
 
 export interface PokemonModel extends PokemonPreviewModel {
-    description?: string
+    stats: PokemonStat
 }

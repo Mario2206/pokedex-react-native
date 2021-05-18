@@ -23,7 +23,7 @@ export default function PokemonItem({ pokemon, onPress }: PokemonItemProps) {
     return (
         <TouchableHighlight
             activeOpacity={0.6}
-            underlayColor={POKE_TYPES.COLORS[pokemon.types[0]]}
+            underlayColor={POKE_TYPES.COLORS[pokemon.types[0].name]}
             onPress={onPress}
         >
             <View style={styles.container}>
@@ -42,7 +42,7 @@ export default function PokemonItem({ pokemon, onPress }: PokemonItemProps) {
                     </View>
                     <View style={styles.badgeWrapper}>
                         {pokemon.types.map((type, index) => (
-                            <TypeBadge type={type} key={index} />
+                            <TypeBadge type={type.name} key={index} />
                         ))}
                     </View>
                 </View>

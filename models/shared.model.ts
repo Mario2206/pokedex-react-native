@@ -1,4 +1,4 @@
-export interface LanguageModel {
+export interface LanguageType {
     url: string
     name: string
 }

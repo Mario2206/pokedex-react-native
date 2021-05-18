@@ -1,12 +1,10 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
-    pokemonListLoading,
     addToPokemonList,
     incrementPage,
+    pokemonListLoading,
 } from '../redux/slices/pokemon-list.slice'
 import PokemonList from '../components/lists/pokemon-list.component'
-import { GetServiceType } from '../services/types/get.service.type'
 import { PokemonModel } from '../models/pokemon.model'
 import {
     getPokemonLoadingFromState,
@@ -14,14 +12,14 @@ import {
     getPokemonsFromState,
 } from '../redux/selectors/pokemon.selector'
 import { useAppDispatch } from '../redux/hooks'
+import { Languages } from '../configuration/languages'
+import { PokemonPreviewService } from '../services/pokemon-preview.service'
 
 interface PokemonListContainerProps {
-    pokemonService: GetServiceType<PokemonModel>
     navigateToDetails: (pokemon: PokemonModel) => void
 }
 
 export default function PokemonListContainer({
-    pokemonService,
     navigateToDetails,
 }: PokemonListContainerProps) {
     const dispatch = useAppDispatch()
@@ -32,9 +30,11 @@ export default function PokemonListContainer({
     useEffect(() => {
         if (loading) return
         dispatch(pokemonListLoading())
-        pokemonService.getAll(page * 20, 20).then((pokemons) => {
-            dispatch(addToPokemonList(pokemons))
-        })
+        new PokemonPreviewService(Languages.FR)
+            .getAll(page * 20, 20)
+            .then((pokemons) => {
+                dispatch(addToPokemonList(pokemons))
+            })
     }, [page])
 
     function populatePokemonList() {

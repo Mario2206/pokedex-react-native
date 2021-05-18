@@ -1,28 +1,18 @@
-import { GetServiceType } from './types/get.service.type'
-import { PokemonSpecies } from '../models/pokemon-species.model'
+import { PokemonSpecies } from '../models/pokemon.model'
 import axios from '../helpers/axios.helper'
 import { Languages } from '../configuration/languages'
-import { filterByLang } from '../helpers/filters.helper'
+import { convertToPokemonSpeciesModel } from '../helpers/model-converters/pokemon.converter'
 
-export default class PokemonSpeciesService
-    implements GetServiceType<PokemonSpecies>
-{
-    constructor(readonly language: Languages) {}
+export default class PokemonSpeciesService {
+    constructor(public language: Languages) {}
 
     get(url: string): Promise<PokemonSpecies> {
         return axios
             .get(url)
-            .then((res) => res.data)
-            .then((data: any) => ({
-                names: filterByLang(this.language, data.names),
-                flavor_text_entries: filterByLang(
-                    this.language,
-                    data.flavor_text_entries
-                ),
+            .then((res) => ({
+                ...res.data,
+                url,
             }))
-    }
-
-    getAll(offset?: number, limit?: number): Promise<PokemonSpecies[]> {
-        return Promise.resolve([])
+            .then(convertToPokemonSpeciesModel(Languages.FR))
     }
 }

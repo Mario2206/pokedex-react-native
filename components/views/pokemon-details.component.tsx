@@ -6,6 +6,7 @@ import { COLORS, POKE_TYPES } from '../../style/color.style'
 import { FONT_SIZES } from '../../style/size.style'
 import TypeLabel from '../labels/type-label.component'
 import toFirstLetterUpperCase from '../../helpers/text.helper'
+import PokemonNav from '../nav/pokemon-nav.component'
 
 interface PokemonDetailsComponentProps {
     pokemon: PokemonModel
@@ -14,11 +15,10 @@ interface PokemonDetailsComponentProps {
 export default function PokemonDetailsComponent({
     pokemon,
 }: PokemonDetailsComponentProps) {
-    console.log(pokemon.types)
     return (
         <LinearGradient
             style={styles.container}
-            colors={POKE_TYPES.GRADIENTS[pokemon.types[0]]}
+            colors={POKE_TYPES.GRADIENTS[pokemon.types[0].name]}
         >
             <View style={styles.subContainer}>
                 <Image
@@ -32,11 +32,19 @@ export default function PokemonDetailsComponent({
                     {pokemon.types.map((type, index) => (
                         <TypeLabel
                             style={styles.label}
-                            type={type}
+                            type={type.name}
                             key={index}
+                            displayName={type.display_name}
                         />
                     ))}
                 </View>
+                <Text>
+                    {pokemon.species.flavor_text_entries[0].flavor_text}
+                </Text>
+                <PokemonNav
+                    activeColor={POKE_TYPES.COLORS[pokemon.types[0].name]}
+                    tabs={['stats', 'evolutions', 'moves']}
+                />
             </View>
         </LinearGradient>
     )

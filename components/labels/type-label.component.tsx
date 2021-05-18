@@ -6,9 +6,14 @@ import { ELEMENT_ICONS } from '../../assets/icons.asset'
 interface TypeLabelProps {
     type: keyof typeof POKE_TYPES.COLORS
     style?: StyleProp<any>
+    displayName: string
 }
 
-export default function TypeLabel({ type, style }: TypeLabelProps) {
+export default function TypeLabel({
+    type,
+    style,
+    displayName,
+}: TypeLabelProps) {
     const Logo = ELEMENT_ICONS[type]
     const color = POKE_TYPES.COLORS[type]
 
@@ -17,7 +22,7 @@ export default function TypeLabel({ type, style }: TypeLabelProps) {
     return (
         <View style={[{ backgroundColor: color }, styles.container, style]}>
             <Logo style={styles.logo} />
-            <Text style={styles.text}>{type.toUpperCase()}</Text>
+            <Text style={styles.text}>{displayName.toUpperCase()}</Text>
         </View>
     )
 }
@@ -27,6 +32,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         padding: 10,
         borderRadius: 50,
         position: 'relative',
@@ -34,6 +40,7 @@ const styles = StyleSheet.create({
     text: {
         color: COLORS.white,
         paddingHorizontal: 10,
+        textAlign: 'center',
     },
     logo: {
         marginRight: 10,
