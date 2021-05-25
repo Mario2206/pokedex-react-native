@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactChildren } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { PokemonModel } from '../../models/pokemon.model'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -6,15 +6,20 @@ import { COLORS, POKE_TYPES } from '../../style/color.style'
 import { FONT_SIZES } from '../../style/size.style'
 import TypeLabel from '../labels/type-label.component'
 import toFirstLetterUpperCase from '../../helpers/text.helper'
-import PokemonNav from '../nav/pokemon-nav.component'
 
 interface PokemonDetailsComponentProps {
-    pokemon: PokemonModel
+    pokemon: PokemonModel | undefined
+    children: JSX.Element | undefined
 }
 
 export default function PokemonDetailsComponent({
     pokemon,
+    children,
 }: PokemonDetailsComponentProps) {
+    if (!pokemon) {
+        return <Text>Loading</Text>
+    }
+
     return (
         <LinearGradient
             style={styles.container}
@@ -38,13 +43,12 @@ export default function PokemonDetailsComponent({
                         />
                     ))}
                 </View>
-                <Text>
-                    {pokemon.species.flavor_text_entries[0].flavor_text}
+                <Text style={styles.description}>
+                    {pokemon.species.flavor_text_entries[0].flavor_text
+                        .split('\n')
+                        .join(' ')}
                 </Text>
-                <PokemonNav
-                    activeColor={POKE_TYPES.COLORS[pokemon.types[0].name]}
-                    tabs={['stats', 'evolutions', 'moves']}
-                />
+                {children}
             </View>
         </LinearGradient>
     )
@@ -66,6 +70,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
+        paddingHorizontal: 30,
     },
     image: {
         width: '80%',
@@ -83,5 +88,11 @@ const styles = StyleSheet.create({
     },
     label: {
         marginVertical: 10,
+    },
+    description: {
+        width: '100%',
+        textAlign: 'center',
+        color: COLORS.black,
+        fontSize: FONT_SIZES.text,
     },
 })

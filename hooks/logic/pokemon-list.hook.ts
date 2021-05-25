@@ -1,27 +1,26 @@
-import React, { useEffect } from 'react'
-import {
-    addToPokemonList,
-    incrementPage,
-    pokemonListLoading,
-} from '../redux/slices/pokemon-list.slice'
-import PokemonList from '../components/lists/pokemon-list.component'
-import { PokemonModel } from '../models/pokemon.model'
+import { useAppDispatch } from '../../redux/hooks'
 import {
     getPokemonLoadingFromState,
     getPokemonPageFromState,
     getPokemonsFromState,
-} from '../redux/selectors/pokemon.selector'
-import { useAppDispatch } from '../redux/hooks'
-import { Languages } from '../configuration/languages'
-import { PokemonPreviewService } from '../services/pokemon-preview.service'
+} from '../../redux/selectors/pokemon.selector'
+import { useEffect } from 'react'
+import {
+    addToPokemonList,
+    incrementPage,
+    pokemonListLoading,
+} from '../../redux/slices/pokemon-list.slice'
+import { PokemonPreviewService } from '../../services/pokemon-preview.service'
+import { Languages } from '../../configuration/languages'
+import { PokemonModel } from '../../models/pokemon.model'
 
-interface PokemonListContainerProps {
+interface usePokemonListProps {
     navigateToDetails: (pokemon: PokemonModel) => void
 }
 
-export default function PokemonListContainer({
+export default function usePokemonList({
     navigateToDetails,
-}: PokemonListContainerProps) {
+}: usePokemonListProps) {
     const dispatch = useAppDispatch()
     const pokemons = getPokemonsFromState()
     const page = getPokemonPageFromState()
@@ -46,11 +45,10 @@ export default function PokemonListContainer({
         navigateToDetails(pokemon)
     }
 
-    return (
-        <PokemonList
-            pokemons={pokemons}
-            onEndScroll={populatePokemonList}
-            onClickItem={onClickPokemonItem}
-        />
-    )
+    return {
+        pokemons,
+        loading,
+        onClickPokemonItem,
+        populatePokemonList,
+    }
 }

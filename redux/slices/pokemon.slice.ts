@@ -8,9 +8,12 @@ export const pokemonSlice = createSlice({
     name: 'pokemon',
     initialState,
     reducers: {
-        set: (state, action: PayloadAction<PokemonModel>) => {
+        setPokemonState: (state, action: PayloadAction<PokemonModel>) => {
             state.isLoading = false
             state.pokemon = action.payload
+        },
+        clearPokemonState: (state) => {
+            state.pokemon = undefined
         },
         loading: (state) => {
             state.isLoading = true
@@ -18,4 +21,5 @@ export const pokemonSlice = createSlice({
     },
 })
 
-export const { set, loading } = pokemonSlice.actions
+export const { setPokemonState, loading, clearPokemonState } =
+    pokemonSlice.actions

@@ -1,30 +1,49 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PokemonStackParamList } from '../pokemon.navigation'
-import PokemonService from '../../../services/pokemon.service'
 import { RouteProp } from '@react-navigation/native'
-import PokemonDetailsContainer from '../../../containers/pokemon-details.container'
 import { useDisableTabBar } from '../../../hooks/tab-bar.hook'
-import { Languages } from '../../../configuration/languages'
+import PokemonDetailsComponent from '../../../components/views/pokemon-details.component'
+import usePokemonDetails from '../../../hooks/logic/pokemon-details.hook'
+import TabNavigator from '../../../components/tab/tab-navigator.component'
+import { POKE_TYPES } from '../../../style/color.style'
+import { Text } from 'react-native'
 
 interface DetailsScreenProps {
     navigation: StackNavigationProp<PokemonStackParamList, 'Details'>
     route: RouteProp<PokemonStackParamList, 'Details'>
 }
 
-const pokemonService = new PokemonService(Languages.FR)
-
 export default function DetailsScreen({
     navigation,
     route,
 }: DetailsScreenProps) {
     useDisableTabBar(navigation)
+    const tabs = [
+        {
+            name: 'stats',
+            component: <Text>1</Text>,
+        },
+        {
+            name: 'evolutions',
+            component: <Text>2</Text>,
+        },
+        {
+            name: 'moves',
+            component: <Text>3</Text>,
+        },
+    ]
+    const { pokemon } = usePokemonDetails({ basePokemon: route.params.pokemon })
 
     return (
-        <PokemonDetailsContainer
-            pokemonService={pokemonService}
-            basePokemon={route.params.pokemon}
-        />
+        <PokemonDetailsComponent pokemon={pokemon}>
+            {pokemon && (
+                <TabNavigator
+                    tabs={tabs}
+                    activeColor={POKE_TYPES.COLORS[pokemon.types[0].name]}
+                />
+            )}
+        </PokemonDetailsComponent>
     )
 }

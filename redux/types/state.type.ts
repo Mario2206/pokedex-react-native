@@ -1,7 +1,7 @@
-import { PokemonModel } from '../../models/pokemon.model'
+import { PokemonModel, PokemonPreviewModel } from '../../models/pokemon.model'
 
 export interface PokemonListState {
-    pokemons: PokemonModel[]
+    pokemons: PokemonPreviewModel[]
     isLoading: boolean
     page: number
 }

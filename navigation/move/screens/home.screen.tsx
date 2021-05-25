@@ -1,13 +1,11 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import SearchContainer from '../../../containers/search.container'
-import PokemonListContainer from '../../../containers/pokemon-list.container'
+import SearchHeaderComponent from '../../../components/headers/search-header.component'
 
 export default function HomeScreen() {
     return (
         <View style={styles.container}>
-            <SearchContainer />
-            <PokemonListContainer />
+            <SearchHeaderComponent />
         </View>
     )
 }
