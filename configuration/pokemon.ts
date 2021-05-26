@@ -6,3 +6,7 @@ export const STATS = {
     'special-defense': 'sdef',
     speed: 'spd',
 }
+
+export const BASE_STATS = {
+    maxValue: 255,
+}

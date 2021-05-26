@@ -1,9 +1,5 @@
 import PokemonSpeciesService from '../../services/pokemon-species.service'
-import {
-    PokemonModel,
-    PokemonPreviewModel,
-    PokemonType,
-} from '../../models/pokemon.model'
+import { PokemonPreviewModel, PokemonType } from '../../models/pokemon.model'
 import { Languages } from '../../configuration/languages'
 import PokemonTypesService from '../../services/pokemon-types.service'
 

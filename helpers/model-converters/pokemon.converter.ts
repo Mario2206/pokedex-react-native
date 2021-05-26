@@ -1,4 +1,8 @@
-import { PokemonModel, PokemonPreviewModel } from '../../models/pokemon.model'
+import {
+    EvolutionChain,
+    PokemonModel,
+    PokemonPreviewModel,
+} from '../../models/pokemon.model'
 import { filterByLang } from '../filters.helper'
 import { Languages } from '../../configuration/languages'
 
@@ -25,7 +29,7 @@ export function convertToPokemonPreviewModel(
 
 export function convertToPokemonModel(data: Record<string, any>): PokemonModel {
     const preview = convertToPokemonPreviewModel(data)
-    return { ...preview, stats: data.stats }
+    return { ...preview, stats: data.stats, evolutionChain: [] }
 }
 
 export function convertToPokemonTypeModel(language: Languages) {
@@ -48,5 +52,30 @@ export function convertToPokemonSpeciesModel(language: Languages) {
             ),
             url: data.url,
         }
+    }
+}
+
+//!TODO : TEST
+export function convertToEvolutionChainModel(language: Languages) {
+    return (data: Record<string, any>): EvolutionChain[] => {
+        const evolutions: EvolutionChain[] = []
+        let chain = data.chain
+
+        while (chain) {
+            evolutions.push({
+                species: {
+                    url: chain.species,
+                    names: [],
+                    flavor_text_entries: [],
+                },
+                evolutionDetails: {
+                    minLevel: chain.evolution_details.minLevel,
+                },
+            })
+
+            chain = chain.evolves_to[0]
+        }
+
+        return evolutions
     }
 }

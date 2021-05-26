@@ -1,5 +1,12 @@
 import React, { ReactChildren } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import {
+    Dimensions,
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native'
 import { PokemonModel } from '../../models/pokemon.model'
 import { LinearGradient } from 'expo-linear-gradient'
 import { COLORS, POKE_TYPES } from '../../style/color.style'
@@ -25,31 +32,41 @@ export default function PokemonDetailsComponent({
             style={styles.container}
             colors={POKE_TYPES.GRADIENTS[pokemon.types[0].name]}
         >
-            <View style={styles.subContainer}>
-                <Image
-                    source={{ uri: pokemon.sprites.front_default }}
-                    style={styles.image}
-                />
-                <Text style={styles.name}>
-                    {toFirstLetterUpperCase(pokemon.name)}
-                </Text>
-                <View style={styles.labelWrapper}>
-                    {pokemon.types.map((type, index) => (
-                        <TypeLabel
-                            style={styles.label}
-                            type={type.name}
-                            key={index}
-                            displayName={type.display_name}
-                        />
-                    ))}
+            <ScrollView>
+                <View
+                    style={[
+                        styles.subContainer,
+                        { minHeight: Dimensions.get('window').height * 0.8 },
+                    ]}
+                >
+                    <Image
+                        source={{ uri: pokemon.sprites.front_default }}
+                        style={[
+                            styles.image,
+                            { top: -Dimensions.get('window').height * 0.2 },
+                        ]}
+                    />
+                    <Text style={styles.name}>
+                        {toFirstLetterUpperCase(pokemon.name)}
+                    </Text>
+                    <View style={styles.labelWrapper}>
+                        {pokemon.types.map((type, index) => (
+                            <TypeLabel
+                                style={styles.label}
+                                type={type.name}
+                                key={index}
+                                displayName={type.display_name}
+                            />
+                        ))}
+                    </View>
+                    <Text style={styles.description}>
+                        {pokemon.species.flavor_text_entries[0].flavor_text
+                            .split('\n')
+                            .join(' ')}
+                    </Text>
+                    {children}
                 </View>
-                <Text style={styles.description}>
-                    {pokemon.species.flavor_text_entries[0].flavor_text
-                        .split('\n')
-                        .join(' ')}
-                </Text>
-                {children}
-            </View>
+            </ScrollView>
         </LinearGradient>
     )
 }
@@ -63,7 +80,6 @@ const styles = StyleSheet.create({
     },
     subContainer: {
         backgroundColor: COLORS.white,
-        flex: 0.75,
         borderTopRightRadius: 60,
         borderTopLeftRadius: 60,
         display: 'flex',
@@ -71,12 +87,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative',
         paddingHorizontal: 30,
+        paddingBottom: 10,
+        marginTop: '50%',
     },
     image: {
         width: '80%',
         aspectRatio: 1,
         position: 'absolute',
-        top: '-30%',
     },
     name: {
         textAlign: 'center',

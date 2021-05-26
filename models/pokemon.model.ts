@@ -1,5 +1,6 @@
 import { POKE_TYPES } from '../style/color.style'
 import { LanguageType } from './shared.model'
+import { STATS } from '../configuration/pokemon'
 
 export interface PokemonSprite {
     back_female: string
@@ -27,7 +28,14 @@ export interface PokemonType {
 export interface PokemonStat {
     effort: number
     base_stat: number
-    stat: { url: string; name: string }
+    stat: { url: string; name: keyof typeof STATS }
+}
+
+export interface EvolutionChain {
+    species: PokemonSpecies
+    evolutionDetails?: {
+        minLevel: number
+    }
 }
 
 export interface PokemonPreviewModel {
@@ -40,5 +48,6 @@ export interface PokemonPreviewModel {
 }
 
 export interface PokemonModel extends PokemonPreviewModel {
-    stats: PokemonStat
+    stats: PokemonStat[]
+    evolutionChain: EvolutionChain[]
 }

@@ -9,6 +9,7 @@ import usePokemonDetails from '../../../hooks/logic/pokemon-details.hook'
 import TabNavigator from '../../../components/tab/tab-navigator.component'
 import { POKE_TYPES } from '../../../style/color.style'
 import { Text } from 'react-native'
+import Statistics from '../../../components/views/statistics.component'
 
 interface DetailsScreenProps {
     navigation: StackNavigationProp<PokemonStackParamList, 'Details'>
@@ -20,10 +21,14 @@ export default function DetailsScreen({
     route,
 }: DetailsScreenProps) {
     useDisableTabBar(navigation)
+    const { pokemon, stats } = usePokemonDetails({
+        basePokemon: route.params.pokemon,
+    })
+
     const tabs = [
         {
             name: 'stats',
-            component: <Text>1</Text>,
+            component: <Statistics items={stats} />,
         },
         {
             name: 'evolutions',
@@ -34,7 +39,6 @@ export default function DetailsScreen({
             component: <Text>3</Text>,
         },
     ]
-    const { pokemon } = usePokemonDetails({ basePokemon: route.params.pokemon })
 
     return (
         <PokemonDetailsComponent pokemon={pokemon}>
