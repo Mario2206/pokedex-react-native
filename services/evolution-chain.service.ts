@@ -2,6 +2,7 @@ import { EvolutionChain, PokemonSpecies } from '../models/pokemon.model'
 import axios from 'axios'
 import { convertToEvolutionChainModel } from '../helpers/model-converters/pokemon.converter'
 import { Languages } from '../configuration/languages'
+import { populateSpecies } from '../helpers/model-modifiers/evolutions.modifier'
 
 export default class EvolutionChainService {
     constructor(readonly language: Languages) {}
@@ -11,5 +12,6 @@ export default class EvolutionChainService {
             .get(url)
             .then((res) => res.data)
             .then(convertToEvolutionChainModel(this.language))
+            .then(populateSpecies(this.language))
     }
 }

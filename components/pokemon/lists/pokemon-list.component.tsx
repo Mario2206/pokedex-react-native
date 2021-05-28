@@ -1,8 +1,8 @@
 import React from 'react'
-import { FlatList, GestureResponderEvent, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import PokemonItem from './pokemon-item.component'
-import { PokemonModel, PokemonPreviewModel } from '../../models/pokemon.model'
-import { detectScrollToBottom } from '../../helpers/scroll.helper'
+import { PokemonModel } from '../../../models/pokemon.model'
+import { detectScrollToBottom } from '../../../helpers/scroll.helper'
 
 interface PokemonListProps {
     pokemons: PokemonModel[]

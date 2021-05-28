@@ -15,8 +15,8 @@ interface StatisticsProps {
 export default function Statistics({ items }: StatisticsProps) {
     return (
         <View>
-            {items.map((item) => (
-                <StatisticItem {...item} />
+            {items.map((item, index) => (
+                <StatisticItem {...item} key={index} />
             ))}
         </View>
     )

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PokemonStackParamList } from '../pokemon.navigation'
 import { PokemonModel } from '../../../models/pokemon.model'
-import PokemonListView from '../../../components/lists/pokemon-list.component'
+import PokemonListView from '../../../components/pokemon/lists/pokemon-list.component'
 import usePokemonList from '../../../hooks/logic/pokemon-list.hook'
 import SearchHeaderComponent from '../../../components/headers/search-header.component'
 

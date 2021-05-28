@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleProp, StyleSheet, View } from 'react-native'
 import BulletNav from '../nav/bullet-nav.component'
 
 interface TabNavigatorProps {
     tabs: { name: string; component: React.ReactNode }[]
     activeColor: string
+    style?: StyleProp<any>
 }
 
-export default function TabNavigator({ tabs, activeColor }: TabNavigatorProps) {
+export default function TabNavigator({
+    tabs,
+    activeColor,
+    style,
+}: TabNavigatorProps) {
     const [selectedTab, setSelectedTab] = useState<any>(tabs[0])
 
     const onPress = (tab: string) => {
@@ -22,7 +27,7 @@ export default function TabNavigator({ tabs, activeColor }: TabNavigatorProps) {
                 activeColor={activeColor}
                 onPress={onPress}
             />
-            <View>{selectedTab.component}</View>
+            <View style={style}>{selectedTab.component}</View>
         </View>
     )
 }

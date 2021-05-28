@@ -14,9 +14,11 @@ export interface PokemonSprite {
 }
 
 export interface PokemonSpecies {
+    id: string
     names: Array<{ name: string; language: LanguageType }>
     flavor_text_entries: Array<{ flavor_text: string; language: LanguageType }>
     url: string
+    evolutionChain?: { url: string }
 }
 
 export interface PokemonType {
@@ -32,22 +34,28 @@ export interface PokemonStat {
 }
 
 export interface EvolutionChain {
+    id: string
     species: PokemonSpecies
     evolutionDetails?: {
         minLevel: number
     }
 }
 
-export interface PokemonPreviewModel {
+export interface MoveModel {
+    id: string
+    url: string
+    names: Array<{ name: string; language: LanguageType }>
+    type: keyof typeof POKE_TYPES.COLORS
+}
+
+export interface PokemonModel {
     name: string
     id: number
     sprites: PokemonSprite
     types: PokemonType[]
     url: string
     species: PokemonSpecies
-}
-
-export interface PokemonModel extends PokemonPreviewModel {
-    stats: PokemonStat[]
-    evolutionChain: EvolutionChain[]
+    stats?: PokemonStat[]
+    evolutionChain?: { chain: EvolutionChain[]; url: string }
+    moves: { move: MoveModel; level: number }[]
 }

@@ -10,9 +10,9 @@ import {
     incrementPage,
     pokemonListLoading,
 } from '../../redux/slices/pokemon-list.slice'
-import { PokemonPreviewService } from '../../services/pokemon-preview.service'
 import { Languages } from '../../configuration/languages'
 import { PokemonModel } from '../../models/pokemon.model'
+import PokemonService from '../../services/pokemon.service'
 
 interface usePokemonListProps {
     navigateToDetails: (pokemon: PokemonModel) => void
@@ -29,8 +29,8 @@ export default function usePokemonList({
     useEffect(() => {
         if (loading) return
         dispatch(pokemonListLoading())
-        new PokemonPreviewService(Languages.FR)
-            .getAll(page * 20, 20)
+        new PokemonService(Languages.FR)
+            .getAllPreviews(page * 20, 20)
             .then((pokemons) => {
                 dispatch(addToPokemonList(pokemons))
             })

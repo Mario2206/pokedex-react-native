@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { COLORS } from '../../style/color.style'
+import { COLORS } from '../../../style/color.style'
 import { LinearGradient } from 'expo-linear-gradient'
 
 interface StatisticItemProps {

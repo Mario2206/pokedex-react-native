@@ -8,12 +8,12 @@ import {
 } from '../../redux/slices/pokemon.slice'
 import PokemonService from '../../services/pokemon.service'
 import { Languages } from '../../configuration/languages'
-import { PokemonPreviewModel } from '../../models/pokemon.model'
 import { BASE_STATS, STATS } from '../../configuration/pokemon'
 import { POKE_TYPES } from '../../style/color.style'
+import { PokemonModel } from '../../models/pokemon.model'
 
 interface usePokemonDetailsProps {
-    basePokemon: PokemonPreviewModel
+    basePokemon: PokemonModel
 }
 
 export default function usePokemonDetails({
@@ -23,7 +23,7 @@ export default function usePokemonDetails({
     const dispatch = useAppDispatch()
 
     const stats =
-        pokemon?.stats.map((stat) => ({
+        pokemon?.stats?.map((stat) => ({
             label: STATS[stat.stat.name],
             value: stat.base_stat,
             maxValue: BASE_STATS.maxValue,
@@ -37,6 +37,9 @@ export default function usePokemonDetails({
             .get(basePokemon.url)
             .then((pokemon) => {
                 dispatch(setPokemonState(pokemon))
+            })
+            .catch((e) => {
+                console.log(e)
             })
 
         return () => {

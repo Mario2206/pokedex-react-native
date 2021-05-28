@@ -7,12 +7,12 @@ import {
     TouchableHighlight,
     GestureResponderEvent,
 } from 'react-native'
-import { PokemonModel, PokemonPreviewModel } from '../../models/pokemon.model'
-import { formatId } from '../../helpers/pokemon.helper'
-import { COLORS, POKE_TYPES } from '../../style/color.style'
-import { FONT_SIZES } from '../../style/size.style'
-import TypeBadge from '../labels/type-badge.component'
-import toFirstLetterUpperCase from '../../helpers/text.helper'
+import { PokemonModel } from '../../../models/pokemon.model'
+import { fetchImage, formatId } from '../../../helpers/pokemon.helper'
+import { COLORS, POKE_TYPES } from '../../../style/color.style'
+import { FONT_SIZES } from '../../../style/size.style'
+import TypeBadge from '../../labels/type-badge.component'
+import toFirstLetterUpperCase from '../../../helpers/text.helper'
 
 interface PokemonItemProps {
     pokemon: PokemonModel
@@ -29,7 +29,7 @@ export default function PokemonItem({ pokemon, onPress }: PokemonItemProps) {
             <View style={styles.container}>
                 <Image
                     style={styles.miniature}
-                    source={{ uri: pokemon.sprites.front_default }}
+                    source={{ uri: fetchImage(pokemon.id) }}
                 />
                 <View style={styles.contentWrapper}>
                     <View>
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     miniature: {
-        width: '20%',
+        width: '15%',
+        margin: 10,
         aspectRatio: 1,
     },
     id: {

@@ -7,12 +7,13 @@ import {
     Text,
     View,
 } from 'react-native'
-import { PokemonModel } from '../../models/pokemon.model'
+import { PokemonModel } from '../../../models/pokemon.model'
 import { LinearGradient } from 'expo-linear-gradient'
-import { COLORS, POKE_TYPES } from '../../style/color.style'
-import { FONT_SIZES } from '../../style/size.style'
-import TypeLabel from '../labels/type-label.component'
-import toFirstLetterUpperCase from '../../helpers/text.helper'
+import { COLORS, POKE_TYPES } from '../../../style/color.style'
+import { FONT_SIZES } from '../../../style/size.style'
+import TypeLabel from '../../labels/type-label.component'
+import toFirstLetterUpperCase from '../../../helpers/text.helper'
+import { fetchImage } from '../../../helpers/pokemon.helper'
 
 interface PokemonDetailsComponentProps {
     pokemon: PokemonModel | undefined
@@ -40,10 +41,10 @@ export default function PokemonDetailsComponent({
                     ]}
                 >
                     <Image
-                        source={{ uri: pokemon.sprites.front_default }}
+                        source={{ uri: fetchImage(pokemon.id) }}
                         style={[
                             styles.image,
-                            { top: -Dimensions.get('window').height * 0.2 },
+                            { top: -Dimensions.get('window').height * 0.1 },
                         ]}
                     />
                     <Text style={styles.name}>
@@ -86,12 +87,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
-        paddingHorizontal: 30,
         paddingBottom: 10,
         marginTop: '50%',
+        paddingHorizontal: '10%',
     },
     image: {
-        width: '80%',
+        width: '50%',
         aspectRatio: 1,
         position: 'absolute',
     },
