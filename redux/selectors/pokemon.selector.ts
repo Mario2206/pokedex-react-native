@@ -1,5 +1,9 @@
 import { useAppSelector } from '../hooks'
-import { PokemonModel } from '../../models/pokemon.model'
+import {
+    MoveModel,
+    PokemonModel,
+    PokemonMoves,
+} from '../../models/pokemon.model'
 
 export const getPokemonsFromState = (): PokemonModel[] =>
     useAppSelector((state) => state.pokemonList.pokemons)
@@ -12,3 +16,6 @@ export const getPokemonLoadingFromState = (): boolean =>
 
 export const getPokemonFromState = (): PokemonModel | undefined =>
     useAppSelector((state) => state.pokemon.pokemon)
+
+export const getPokemonMovesFromState = (): PokemonMoves[] | null =>
+    useAppSelector((state) => state.pokemon.moves)

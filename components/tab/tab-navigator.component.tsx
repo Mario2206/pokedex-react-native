@@ -19,6 +19,8 @@ export default function TabNavigator({
         setSelectedTab(tabs.find((item) => item.name === tab))
     }
 
+    const Component = selectedTab.component
+
     return (
         <View>
             <BulletNav
@@ -27,7 +29,9 @@ export default function TabNavigator({
                 activeColor={activeColor}
                 onPress={onPress}
             />
-            <View style={style}>{selectedTab.component}</View>
+            <View style={style}>
+                <Component />
+            </View>
         </View>
     )
 }

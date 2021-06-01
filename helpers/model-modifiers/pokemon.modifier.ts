@@ -48,11 +48,12 @@ export function addMoves<T extends PokemonModel>(language: Languages) {
     return async (data: PokemonModel): Promise<PokemonModel> => {
         const moveService = new MovesService(language)
 
-        data.moves = await Promise.all(
+        const moves = await Promise.all(
             data.moves.map(async (move) => {
                 return { ...move, move: await moveService.get(move.move.url) }
             })
         )
-        return data
+
+        return { ...data, moves }
     }
 }

@@ -1,16 +1,21 @@
-import { getPokemonFromState } from '../../redux/selectors/pokemon.selector'
+import {
+    getPokemonMovesFromState,
+    getPokemonFromState,
+} from '../../redux/selectors/pokemon.selector'
 import { useAppDispatch } from '../../redux/hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
     clearPokemonState,
     loading,
     setPokemonState,
+    setMovesState,
 } from '../../redux/slices/pokemon.slice'
 import PokemonService from '../../services/pokemon.service'
 import { Languages } from '../../configuration/languages'
 import { BASE_STATS, STATS } from '../../configuration/pokemon'
 import { POKE_TYPES } from '../../style/color.style'
 import { PokemonModel } from '../../models/pokemon.model'
+import { addMoves } from '../../helpers/model-modifiers/pokemon.modifier'
 
 interface usePokemonDetailsProps {
     basePokemon: PokemonModel
@@ -21,6 +26,7 @@ export default function usePokemonDetails({
 }: usePokemonDetailsProps) {
     const pokemon = getPokemonFromState()
     const dispatch = useAppDispatch()
+    const moves = getPokemonMovesFromState()
 
     const stats =
         pokemon?.stats?.map((stat) => ({
@@ -47,8 +53,19 @@ export default function usePokemonDetails({
         }
     }, [])
 
+    const fetchPokemonMove = async () => {
+        if (pokemon && !moves) {
+            addMoves(Languages.FR)(pokemon).then((newPokemon) => {
+                /*  console.log({ newPokemon: newPokemon.moves })*/
+                dispatch(setMovesState(newPokemon.moves))
+            })
+        }
+    }
+
     return {
         pokemon,
         stats,
+        fetchPokemonMove,
+        moves,
     }
 }

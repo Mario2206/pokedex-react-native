@@ -28,7 +28,6 @@ export default class PokemonService {
             .then(populateSpecies<PokemonModel>(this.language))
             .then(translateTypes(this.language))
             .then(addEvolutionChain(this.language))
-            .then(addMoves(this.language))
     }
 
     /**

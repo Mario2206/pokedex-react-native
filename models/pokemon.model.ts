@@ -48,6 +48,11 @@ export interface MoveModel {
     type: keyof typeof POKE_TYPES.COLORS
 }
 
+export interface PokemonMoves {
+    move: MoveModel
+    level: number
+}
+
 export interface PokemonModel {
     name: string
     id: number
@@ -57,5 +62,5 @@ export interface PokemonModel {
     species: PokemonSpecies
     stats?: PokemonStat[]
     evolutionChain?: { chain: EvolutionChain[]; url: string }
-    moves: { move: MoveModel; level: number }[]
+    moves: PokemonMoves[]
 }

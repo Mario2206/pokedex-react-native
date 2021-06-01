@@ -1,8 +1,12 @@
 import { PokemonState } from '../types/state.type'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PokemonModel } from '../../models/pokemon.model'
+import { PokemonModel, PokemonMoves } from '../../models/pokemon.model'
 
-const initialState: PokemonState = { isLoading: false, pokemon: undefined }
+const initialState: PokemonState = {
+    isLoading: false,
+    pokemon: undefined,
+    moves: null,
+}
 
 export const pokemonSlice = createSlice({
     name: 'pokemon',
@@ -13,13 +17,18 @@ export const pokemonSlice = createSlice({
             state.pokemon = action.payload
         },
         clearPokemonState: (state) => {
-            state.pokemon = undefined
+            state.isLoading = initialState.isLoading
+            state.pokemon = initialState.pokemon
+            state.moves = initialState.moves
         },
         loading: (state) => {
             state.isLoading = true
         },
+        setMovesState: (state, action: PayloadAction<PokemonMoves[]>) => {
+            state.moves = [...action.payload]
+        },
     },
 })
 
-export const { setPokemonState, loading, clearPokemonState } =
+export const { setPokemonState, loading, clearPokemonState, setMovesState } =
     pokemonSlice.actions

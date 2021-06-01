@@ -19,7 +19,7 @@ interface PokemonItemProps {
     onPress: (event: GestureResponderEvent) => void
 }
 
-export default function PokemonItem({ pokemon, onPress }: PokemonItemProps) {
+function PokemonItem({ pokemon, onPress }: PokemonItemProps) {
     return (
         <TouchableHighlight
             activeOpacity={0.6}
@@ -84,3 +84,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 })
+
+function arePropsEqual(
+    prevProps: PokemonItemProps,
+    nextProps: PokemonItemProps
+) {
+    return prevProps?.pokemon.id === nextProps?.pokemon.id
+}
+
+export default React.memo(PokemonItem, arePropsEqual)

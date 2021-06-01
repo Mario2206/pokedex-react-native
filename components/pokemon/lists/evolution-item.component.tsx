@@ -11,10 +11,7 @@ interface EvolutionItemProps {
     nextPokemon: EvolutionChain
 }
 
-export default function EvolutionItem({
-    pokemon,
-    nextPokemon,
-}: EvolutionItemProps) {
+function EvolutionItem({ pokemon, nextPokemon }: EvolutionItemProps) {
     return (
         <View style={styles.container}>
             <View style={styles.parts}>
@@ -72,3 +69,5 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 })
+
+export default React.memo(EvolutionItem)
