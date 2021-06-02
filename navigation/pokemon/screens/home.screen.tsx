@@ -3,9 +3,10 @@ import { StyleSheet, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PokemonStackParamList } from '../pokemon.navigation'
 import { PokemonModel } from '../../../models/pokemon.model'
-import PokemonListView from '../../../components/pokemon/lists/pokemon-list.component'
 import usePokemonList from '../../../hooks/logic/pokemon-list.hook'
 import SearchHeaderComponent from '../../../components/headers/search-header.component'
+import MainList from '../../../components/list/main-list.component'
+import PokemonItem from '../../../components/pokemon/lists/pokemon-item.component'
 
 interface HomeScreenProps {
     navigation: StackNavigationProp<PokemonStackParamList, 'Home'>
@@ -16,16 +17,22 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         navigation.navigate('Details', { pokemon })
     }
 
-    const { pokemons, populatePokemonList, onClickPokemonItem } =
+    const { pokemons, populatePokemonList, onClickPokemonItem, loading } =
         usePokemonList({ navigateToDetails })
 
     return (
         <View style={styles.container}>
             <SearchHeaderComponent />
-            <PokemonListView
-                pokemons={pokemons}
+            <MainList
+                isLoading={loading}
+                items={pokemons}
                 onEndScroll={populatePokemonList}
-                onClickItem={onClickPokemonItem}
+                renderItem={({ item }) => (
+                    <PokemonItem
+                        pokemon={item}
+                        onPress={() => onClickPokemonItem(item)}
+                    />
+                )}
             />
         </View>
     )

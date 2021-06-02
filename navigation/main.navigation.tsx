@@ -5,10 +5,9 @@ import PokemonNavigation from './pokemon/pokemon.navigation'
 import MoveNavigation from './move/move.navigation'
 import ItemNavigation from './item/item.navigation'
 import { COLORS } from '../style/color.style'
-
-const PikachuIcon = require('../assets/menu/pikachu.svg').default
-const DiskIcon = require('../assets/menu/disk.svg').default
-const CandyIcon = require('../assets/menu/candy.svg').default
+import PikachuIcon from '../components/icons/pikachu-icon.component'
+import DiskIcon from '../components/icons/disk-icon.component'
+import CandyIcon from '../components/icons/candy-icon.component'
 
 const Tab = createBottomTabNavigator()
 
@@ -19,22 +18,35 @@ export default function MainNavigation() {
                 tabBarOptions={{
                     activeBackgroundColor: COLORS.red,
                     inactiveBackgroundColor: COLORS.red,
+                    activeTintColor: COLORS.black,
+                    inactiveTintColor: COLORS.white,
+                    // style: { padding: 10 },
                 }}
             >
                 <Tab.Screen
                     options={{
-                        tabBarIcon: () => <PikachuIcon />,
+                        tabBarIcon: ({ focused }) => (
+                            <PikachuIcon isFocused={focused} />
+                        ),
                     }}
                     name="pokemon"
                     component={PokemonNavigation}
                 />
                 <Tab.Screen
-                    options={{ tabBarIcon: () => <DiskIcon /> }}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <DiskIcon isFocused={focused} />
+                        ),
+                    }}
                     name="move"
                     component={MoveNavigation}
                 />
                 <Tab.Screen
-                    options={{ tabBarIcon: () => <CandyIcon /> }}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <CandyIcon isFocused={focused} />
+                        ),
+                    }}
                     name="item"
                     component={ItemNavigation}
                 />

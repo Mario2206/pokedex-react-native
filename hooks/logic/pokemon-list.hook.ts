@@ -13,6 +13,7 @@ import {
 import { Languages } from '../../configuration/languages'
 import { PokemonModel } from '../../models/pokemon.model'
 import PokemonService from '../../services/pokemon.service'
+import { MAX_ITEMS_BY_PAGE } from '../../constant/list'
 
 interface usePokemonListProps {
     navigateToDetails: (pokemon: PokemonModel) => void
@@ -30,7 +31,7 @@ export default function usePokemonList({
         if (loading) return
         dispatch(pokemonListLoading())
         new PokemonService(Languages.FR)
-            .getAllPreviews(page * 20, 20)
+            .getAllPreviews(page * MAX_ITEMS_BY_PAGE, MAX_ITEMS_BY_PAGE)
             .then((pokemons) => {
                 dispatch(addToPokemonList(pokemons))
             })

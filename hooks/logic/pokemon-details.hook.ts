@@ -57,7 +57,11 @@ export default function usePokemonDetails({
         if (pokemon && !moves) {
             addMoves(Languages.FR)(pokemon).then((newPokemon) => {
                 /*  console.log({ newPokemon: newPokemon.moves })*/
-                dispatch(setMovesState(newPokemon.moves))
+                const sortmoves = [...newPokemon.moves].sort(
+                    (move1, move2) => move1.level - move2.level
+                )
+
+                dispatch(setMovesState(sortmoves))
             })
         }
     }

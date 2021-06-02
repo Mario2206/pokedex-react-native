@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { MoveModel, PokemonMoves } from '../../../models/pokemon.model'
+import { PokemonMoves } from '../../../models/pokemon.model'
 import { View, Text, StyleSheet } from 'react-native'
-import TypeBadge from '../../labels/type-badge.component'
 import { COLORS } from '../../../style/color.style'
 import { FONT_SIZES } from '../../../style/size.style'
 import PokeballLoader from '../../loaders/pokeball-loader.component'
+import MoveItem from '../../move/list/move-item.component'
 
 interface MoveListProps {
     moves: PokemonMoves[] | null
@@ -21,24 +21,10 @@ export default function MoveList({ moves, onMount }: MoveListProps) {
         return <PokeballLoader />
     }
 
-    const sortmoves = [...moves].sort(
-        (move1, move2) => move1.level - move2.level
-    )
-
-    const Item = ({ item }: { item: { move: MoveModel; level: number } }) => (
-        <View style={styles.itemContainer}>
-            <View>
-                <Text style={styles.title}>{item.move.names[0].name}</Text>
-                <Text style={styles.level}>Nv. {item.level}</Text>
-            </View>
-            <TypeBadge type={item.move.type} />
-        </View>
-    )
-
     return (
         <View>
-            {sortmoves.map((move, index) => (
-                <Item item={move} key={index} />
+            {moves.map((move, index: number) => (
+                <MoveItem item={move} key={index} />
             ))}
         </View>
     )

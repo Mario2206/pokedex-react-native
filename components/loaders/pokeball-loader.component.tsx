@@ -15,7 +15,7 @@ export default function PokeballLoader() {
         rotateAnim.setValue(0)
         Animated.timing(rotateAnim, {
             toValue: 1,
-            duration: 2000,
+            duration: 1000,
             useNativeDriver: true,
         }).start(runAnimation)
     }
@@ -25,37 +25,45 @@ export default function PokeballLoader() {
     }, [rotateAnim])
 
     return (
-        <Animated.View
-            style={[
-                styles.container,
-                {
-                    width: size,
-                    height: size,
-                    transform: [
-                        {
-                            rotate: rotateValue,
-                        },
-                    ],
-                },
-            ]}
-        >
-            <View style={[styles.part, styles.redPart]} />
-            <View style={styles.centerWrapper}>
-                <View style={styles.belt}>
-                    <View
-                        style={[
-                            styles.circleBelt,
-                            { width: size * 0.3, height: size * 0.3 },
-                        ]}
-                    />
+        <View style={styles.wrapper}>
+            <Animated.View
+                style={[
+                    styles.container,
+                    {
+                        width: size,
+                        height: size,
+                        transform: [
+                            {
+                                rotate: rotateValue,
+                            },
+                        ],
+                    },
+                ]}
+            >
+                <View style={[styles.part, styles.redPart]} />
+                <View style={styles.centerWrapper}>
+                    <View style={styles.belt}>
+                        <View
+                            style={[
+                                styles.circleBelt,
+                                { width: size * 0.3, height: size * 0.3 },
+                            ]}
+                        />
+                    </View>
                 </View>
-            </View>
-            <View style={[styles.part, styles.whitePart]} />
-        </Animated.View>
+                <View style={[styles.part, styles.whitePart]} />
+            </Animated.View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     container: {
         borderRadius: 100,
         borderWidth: 2,
