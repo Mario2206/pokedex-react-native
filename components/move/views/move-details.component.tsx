@@ -23,17 +23,21 @@ export default function MoveDetails({ move }: MoveDetailsProps) {
                 type={move.type}
             />
             <Text style={styles.name}>{move.names[0].name}</Text>
-            <TypeLabel type={move.type} displayName={move.type} />
-            <Text>{move.description}</Text>
+            <View style={styles.labelWrapper}>
+                <TypeLabel type={move.type} displayName={move.type} />
+            </View>
+
+            <Text style={styles.description}>{move.description}</Text>
             <HorizontalRowList
+                titleColor={POKE_TYPES.COLORS[move.type]}
                 data={[
                     {
-                        label: 'Base Power',
+                        label: 'Power',
                         value: String(move.power),
                     },
                     {
                         label: 'Accuracy',
-                        value: String(move.accuracy),
+                        value: String(move.accuracy) + '%',
                     },
                     {
                         label: 'PP',
@@ -54,5 +58,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: FONT_SIZES.title,
         marginTop: 100,
+    },
+    labelWrapper: {
+        marginVertical: 20,
+    },
+    description: {
+        textAlign: 'center',
+        marginBottom: 40,
     },
 })

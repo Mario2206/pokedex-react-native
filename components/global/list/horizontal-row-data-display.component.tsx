@@ -1,19 +1,26 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { COLORS } from '../../../style/color.style'
+import { FONT_SIZES } from '../../../style/size.style'
 
 interface HorizontalRowDataDisplay {
     data: { value: string; label: string }[]
+    titleColor: string
 }
 
-export default function HorizontalRowList({ data }: HorizontalRowDataDisplay) {
+export default function HorizontalRowList({
+    data,
+    titleColor,
+}: HorizontalRowDataDisplay) {
     return (
         <View style={styles.container}>
             {data.map((item, index) => (
                 <>
                     <View style={styles.item} key={index}>
-                        <Text>{item.label}</Text>
-                        <Text>{item.value}</Text>
+                        <Text style={[{ color: titleColor }, styles.title]}>
+                            {item.label}
+                        </Text>
+                        <Text style={styles.value}>{item.value}</Text>
                     </View>
                     {index < data.length - 1 && (
                         <View style={styles.delimiter} />
@@ -37,9 +44,18 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.lightGrey,
     },
     item: {
-        // marginRight: 20,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        flex: 1,
+    },
+    title: {
+        fontSize: FONT_SIZES.text,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    value: {
+        fontSize: FONT_SIZES.text,
+        marginVertical: 30,
     },
 })
