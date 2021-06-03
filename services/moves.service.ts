@@ -1,7 +1,7 @@
 import { Languages } from '../configuration/languages'
 import axios from '../helpers/axios.helper'
-import { convertToMoveModel } from '../helpers/model-converters/pokemon.converter'
-import { MoveModel } from '../models/pokemon.model'
+import { MoveModel } from '../models/move.model'
+import { convertToMoveModel } from '../helpers/model-converters/move.converter'
 
 export default class MovesService {
     constructor(readonly language: Languages) {}

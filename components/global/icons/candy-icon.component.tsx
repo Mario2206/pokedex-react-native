@@ -1,7 +1,7 @@
 import React from 'react'
-import { IconProps } from '../../types/props'
+import { IconProps } from '../../../types/props'
 import Svg, { G, Path } from 'react-native-svg'
-import { COLORS } from '../../style/color.style'
+import { COLORS } from '../../../style/color.style'
 
 interface CandyIconProps extends IconProps {}
 

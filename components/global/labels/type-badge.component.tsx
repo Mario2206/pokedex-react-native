@@ -1,15 +1,16 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleProp, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { POKE_TYPES } from '../../style/color.style'
+import { POKE_TYPES } from '../../../style/color.style'
 import { Dimensions } from 'react-native'
-import { ELEMENT_ICONS } from '../../assets/icons.asset'
+import { ELEMENT_ICONS } from '../../../assets/icons.asset'
 
 interface TypeBadgeProps {
     type: keyof typeof POKE_TYPES.COLORS
+    style?: StyleProp<any>
 }
 
-export default function TypeBadge({ type }: TypeBadgeProps) {
+export default function TypeBadge({ type, style }: TypeBadgeProps) {
     const Logo = ELEMENT_ICONS[type]
     const gradient = POKE_TYPES.GRADIENTS[type]
     const color = POKE_TYPES.COLORS[type]
@@ -27,6 +28,7 @@ export default function TypeBadge({ type }: TypeBadgeProps) {
                     width: Dimensions.get('window').width * 0.1,
                     shadowColor: POKE_TYPES.COLORS[type],
                 },
+                style,
             ]}
         >
             <Logo width={'60%'} height={'60%'} />

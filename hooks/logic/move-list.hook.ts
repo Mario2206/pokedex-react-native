@@ -6,7 +6,7 @@ import {
 import { useEffect } from 'react'
 import MovesService from '../../services/moves.service'
 import { Languages } from '../../configuration/languages'
-import { MAX_ITEMS_BY_PAGE } from '../../constant/list'
+import { MAX_ITEMS_BY_PAGE } from '../../configuration/list'
 import { useAppDispatch } from '../../redux/hooks'
 import {
     addToMoveList,

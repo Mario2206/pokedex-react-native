@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleProp, StyleSheet, Text, View } from 'react-native'
-import { COLORS, POKE_TYPES } from '../../style/color.style'
-import { ELEMENT_ICONS } from '../../assets/icons.asset'
+import { COLORS, POKE_TYPES } from '../../../style/color.style'
+import { ELEMENT_ICONS } from '../../../assets/icons.asset'
 
 interface TypeLabelProps {
     type: keyof typeof POKE_TYPES.COLORS

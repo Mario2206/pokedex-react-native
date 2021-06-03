@@ -1,7 +1,7 @@
 import React from 'react'
 import Svg, { G, Path } from 'react-native-svg'
-import { COLORS } from '../../style/color.style'
-import { IconProps } from '../../types/props'
+import { COLORS } from '../../../style/color.style'
+import { IconProps } from '../../../types/props'
 
 interface PikachuIconProps extends IconProps {}
 

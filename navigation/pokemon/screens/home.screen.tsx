@@ -4,8 +4,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { PokemonStackParamList } from '../pokemon.navigation'
 import { PokemonModel } from '../../../models/pokemon.model'
 import usePokemonList from '../../../hooks/logic/pokemon-list.hook'
-import SearchHeaderComponent from '../../../components/headers/search-header.component'
-import MainList from '../../../components/list/main-list.component'
+import SearchHeaderComponent from '../../../components/global/headers/search-header.component'
+import MainList from '../../../components/global/list/main-list.component'
 import PokemonItem from '../../../components/pokemon/lists/pokemon-item.component'
 
 interface HomeScreenProps {

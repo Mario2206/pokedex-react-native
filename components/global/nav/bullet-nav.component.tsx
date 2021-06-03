@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
-import { COLORS } from '../../style/color.style'
+import { COLORS } from '../../../style/color.style'
 
 interface BulletNavProps {
     tabs: string[]

@@ -1,8 +1,4 @@
-import {
-    EvolutionChain,
-    MoveModel,
-    PokemonModel,
-} from '../../models/pokemon.model'
+import { EvolutionChain, PokemonModel } from '../../models/pokemon.model'
 import { filterByLang } from '../filters.helper'
 import { Languages } from '../../configuration/languages'
 
@@ -87,16 +83,5 @@ export function convertToEvolutionChainModel(language: Languages) {
         }
 
         return evolutions
-    }
-}
-
-export function convertToMoveModel(language: Languages) {
-    return (data: Record<string, any>): MoveModel => {
-        return {
-            url: data.url,
-            id: data.id,
-            names: filterByLang(language, data.names),
-            type: data.type.name,
-        }
     }
 }

@@ -5,9 +5,9 @@ import PokemonNavigation from './pokemon/pokemon.navigation'
 import MoveNavigation from './move/move.navigation'
 import ItemNavigation from './item/item.navigation'
 import { COLORS } from '../style/color.style'
-import PikachuIcon from '../components/icons/pikachu-icon.component'
-import DiskIcon from '../components/icons/disk-icon.component'
-import CandyIcon from '../components/icons/candy-icon.component'
+import PikachuIcon from '../components/global/icons/pikachu-icon.component'
+import DiskIcon from '../components/global/icons/disk-icon.component'
+import CandyIcon from '../components/global/icons/candy-icon.component'
 
 const Tab = createBottomTabNavigator()
 

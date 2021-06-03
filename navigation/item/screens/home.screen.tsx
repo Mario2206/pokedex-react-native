@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import SearchHeaderComponent from '../../../components/headers/search-header.component'
+import SearchHeaderComponent from '../../../components/global/headers/search-header.component'
 
 export default function HomeScreen() {
     return (

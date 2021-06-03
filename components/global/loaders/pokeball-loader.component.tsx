@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Animated, Dimensions, StyleSheet, View } from 'react-native'
-import { COLORS } from '../../style/color.style'
+import { COLORS } from '../../../style/color.style'
 
 export default function PokeballLoader() {
     const rotateAnim = useRef(new Animated.Value(0)).current

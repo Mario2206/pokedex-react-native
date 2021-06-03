@@ -11,7 +11,7 @@ import { PokemonModel } from '../../../models/pokemon.model'
 import { fetchImage, formatId } from '../../../helpers/pokemon.helper'
 import { COLORS, POKE_TYPES } from '../../../style/color.style'
 import { FONT_SIZES } from '../../../style/size.style'
-import TypeBadge from '../../labels/type-badge.component'
+import TypeBadge from '../../global/labels/type-badge.component'
 import toFirstLetterUpperCase from '../../../helpers/text.helper'
 
 interface PokemonItemProps {

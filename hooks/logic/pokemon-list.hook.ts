@@ -13,7 +13,7 @@ import {
 import { Languages } from '../../configuration/languages'
 import { PokemonModel } from '../../models/pokemon.model'
 import PokemonService from '../../services/pokemon.service'
-import { MAX_ITEMS_BY_PAGE } from '../../constant/list'
+import { MAX_ITEMS_BY_PAGE } from '../../configuration/list'
 
 interface usePokemonListProps {
     navigateToDetails: (pokemon: PokemonModel) => void

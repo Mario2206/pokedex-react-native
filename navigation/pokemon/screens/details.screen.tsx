@@ -5,12 +5,13 @@ import { RouteProp } from '@react-navigation/native'
 import { useDisableTabBar } from '../../../hooks/tab-bar.hook'
 import PokemonDetailsComponent from '../../../components/pokemon/views/pokemon-details.component'
 import usePokemonDetails from '../../../hooks/logic/pokemon-details.hook'
-import TabNavigator from '../../../components/tab/tab-navigator.component'
+import TabNavigator from '../../../components/global/tab/tab-navigator.component'
 import { POKE_TYPES } from '../../../style/color.style'
 import Statistics from '../../../components/pokemon/views/statistics.component'
 import EvolutionList from '../../../components/pokemon/lists/evolution-list.component'
 import MoveList from '../../../components/pokemon/lists/move-list.component'
 import { getPokemonMovesFromState } from '../../../redux/selectors/pokemon.selector'
+import { PokemonMoves } from '../../../models/pokemon.model'
 
 interface DetailsScreenProps {
     navigation: StackNavigationProp<PokemonStackParamList, 'Details'>
@@ -25,6 +26,7 @@ export default function DetailsScreen({
     const { pokemon, stats, fetchPokemonMove } = usePokemonDetails({
         basePokemon: route.params.pokemon,
     })
+
     const tabs = [
         {
             name: 'stats',

@@ -1,6 +1,7 @@
 import { POKE_TYPES } from '../style/color.style'
 import { LanguageType } from './shared.model'
 import { STATS } from '../configuration/pokemon'
+import { MoveModel } from './move.model'
 
 export interface PokemonSprite {
     back_female: string
@@ -39,13 +40,6 @@ export interface EvolutionChain {
     evolutionDetails?: {
         minLevel: number
     }
-}
-
-export interface MoveModel {
-    id: string
-    url: string
-    names: Array<{ name: string; language: LanguageType }>
-    type: keyof typeof POKE_TYPES.COLORS
 }
 
 export interface PokemonMoves {
