@@ -10,7 +10,6 @@ import {
     incrementPage,
     pokemonListLoading,
 } from '../../redux/slices/pokemon-list.slice'
-import { Languages } from '../../configuration/languages'
 import { PokemonModel } from '../../models/pokemon.model'
 import PokemonService from '../../services/pokemon.service'
 import { MAX_ITEMS_BY_PAGE } from '../../configuration/list'
@@ -30,11 +29,12 @@ export default function usePokemonList({
     useEffect(() => {
         if (loading) return
         dispatch(pokemonListLoading())
-        new PokemonService(Languages.FR)
-            .getAllPreviews(page * MAX_ITEMS_BY_PAGE, MAX_ITEMS_BY_PAGE)
-            .then((pokemons) => {
-                dispatch(addToPokemonList(pokemons))
-            })
+        PokemonService.getAllPreviews(
+            page * MAX_ITEMS_BY_PAGE,
+            MAX_ITEMS_BY_PAGE
+        ).then((pokemons) => {
+            dispatch(addToPokemonList(pokemons))
+        })
     }, [page])
 
     function populatePokemonList() {

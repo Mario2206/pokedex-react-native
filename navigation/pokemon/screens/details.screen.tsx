@@ -11,7 +11,6 @@ import Statistics from '../../../components/pokemon/views/statistics.component'
 import EvolutionList from '../../../components/pokemon/lists/evolution-list.component'
 import MoveList from '../../../components/pokemon/lists/move-list.component'
 import { getPokemonMovesFromState } from '../../../redux/selectors/pokemon.selector'
-import { PokemonMoves } from '../../../models/pokemon.model'
 
 interface DetailsScreenProps {
     navigation: StackNavigationProp<PokemonStackParamList, 'Details'>

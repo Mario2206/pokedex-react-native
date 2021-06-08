@@ -1,5 +1,4 @@
 import { PokemonModel } from '../models/pokemon.model'
-import { Languages } from '../configuration/languages'
 import axios from '../helpers/axios.helper'
 import {
     convertToPokemonModel,
@@ -14,32 +13,28 @@ import { addEvolutionChain } from '../helpers/model-modifiers/pokemon.modifier'
 import originalAxios from 'axios'
 
 export default class PokemonService {
-    constructor(readonly language: Languages) {}
-
     /**
      * Get with all details
      * @param url
      */
-    get(url: string): Promise<PokemonModel> {
-        return axios
+    static async get(url: string): Promise<PokemonModel> {
+        return originalAxios
             .get(url)
-            .then((res) => res.data)
-            .then(convertToPokemonModel)
-            .then(populateSpecies<PokemonModel>(this.language))
-            .then(translateTypes(this.language))
-            .then(addEvolutionChain(this.language))
+            .then((res) => convertToPokemonModel(res.data))
+            .then(populateSpecies)
+            .then(translateTypes)
+            .then(addEvolutionChain)
     }
 
     /**
      * Get only data for preview
      * @param url
      */
-    getPreview(url: string): Promise<PokemonModel> {
+    static getPreview(url: string): Promise<PokemonModel> {
         return originalAxios
             .get(url)
-            .then((res) => ({ ...res.data, url }))
-            .then(convertToPokemonPreviewModel)
-            .then(populateSpecies(this.language))
+            .then((res) => convertToPokemonModel({ ...res.data, url }))
+            .then(populateSpecies)
     }
 
     /**
@@ -47,13 +42,15 @@ export default class PokemonService {
      * @param offset
      * @param limit
      */
-    getAllPreviews(offset: number, limit: number): Promise<PokemonModel[]> {
+    static getAllPreviews(
+        offset: number,
+        limit: number
+    ): Promise<PokemonModel[]> {
         return axios
             .get('/pokemon?offset=' + offset + '&limit=' + limit)
-            .then((res) => res.data)
             .then(async (res) => {
                 return await Promise.all(
-                    res.results.map(
+                    res.data.results.map(
                         async (pokemon: { url: string }) =>
                             await this.getPreview(pokemon.url)
                     )

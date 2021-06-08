@@ -4,9 +4,7 @@ import { MoveModel } from '../models/move.model'
 import { convertToMoveModel } from '../helpers/model-converters/move.converter'
 
 export default class MovesService {
-    constructor(readonly language: Languages) {}
-
-    getMany(offset: number, limit: number): Promise<MoveModel[]> {
+    static getMany(offset: number, limit: number): Promise<MoveModel[]> {
         return axios
             .get('/move?offset=' + offset + '&limit=' + limit)
             .then((res) => res.data)
@@ -20,13 +18,12 @@ export default class MovesService {
             })
     }
 
-    get(url: string): Promise<MoveModel> {
-        return axios
-            .get(url)
-            .then((res) => ({
+    static get(url: string): Promise<MoveModel> {
+        return axios.get(url).then((res) =>
+            convertToMoveModel({
                 ...res.data,
                 url,
-            }))
-            .then(convertToMoveModel(this.language))
+            })
+        )
     }
 }

@@ -5,7 +5,6 @@ import {
 } from '../../redux/selectors/move.selector'
 import { useEffect } from 'react'
 import MovesService from '../../services/moves.service'
-import { Languages } from '../../configuration/languages'
 import { MAX_ITEMS_BY_PAGE } from '../../configuration/list'
 import { useAppDispatch } from '../../redux/hooks'
 import {
@@ -22,8 +21,7 @@ export default function useMoveList() {
 
     useEffect(() => {
         dispatch(moveListLoading())
-        new MovesService(Languages.FR)
-            .getMany(page * MAX_ITEMS_BY_PAGE, MAX_ITEMS_BY_PAGE)
+        MovesService.getMany(page * MAX_ITEMS_BY_PAGE, MAX_ITEMS_BY_PAGE)
             .then((data) => {
                 dispatch(addToMoveList(data))
             })

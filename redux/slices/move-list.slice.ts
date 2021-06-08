@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { MoveModel } from '../../models/pokemon.model'
 import { MoveListState } from '../types/state.type'
+import { MoveModel } from '../../models/move.model'
 
 const initialState: MoveListState = {
     moves: [] as MoveModel[],

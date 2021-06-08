@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailsWrapper from '../../global/wrapper/detail-wrapper.component'
+import DetailsWrapper from '../../global/layouts/details-layout.component'
 import { MoveModel } from '../../../models/move.model'
 import TypeBadge from '../../global/labels/type-badge.component'
 import { POKE_TYPES } from '../../../style/color.style'

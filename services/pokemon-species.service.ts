@@ -4,15 +4,12 @@ import { Languages } from '../configuration/languages'
 import { convertToPokemonSpeciesModel } from '../helpers/model-converters/pokemon.converter'
 
 export default class PokemonSpeciesService {
-    constructor(public language: Languages) {}
-
-    get(url: string): Promise<PokemonSpecies> {
-        return axios
-            .get(url)
-            .then((res) => ({
+    static get(url: string): Promise<PokemonSpecies> {
+        return axios.get(url).then((res) =>
+            convertToPokemonSpeciesModel({
                 ...res.data,
                 url,
-            }))
-            .then(convertToPokemonSpeciesModel(Languages.FR))
+            })
+        )
     }
 }

@@ -15,8 +15,8 @@ export default function HorizontalRowList({
     return (
         <View style={styles.container}>
             {data.map((item, index) => (
-                <>
-                    <View style={styles.item} key={index}>
+                <React.Fragment key={index}>
+                    <View style={styles.item}>
                         <Text style={[{ color: titleColor }, styles.title]}>
                             {item.label}
                         </Text>
@@ -25,7 +25,7 @@ export default function HorizontalRowList({
                     {index < data.length - 1 && (
                         <View style={styles.delimiter} />
                     )}
-                </>
+                </React.Fragment>
             ))}
         </View>
     )

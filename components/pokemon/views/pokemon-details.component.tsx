@@ -14,7 +14,7 @@ import { FONT_SIZES } from '../../../style/size.style'
 import TypeLabel from '../../global/labels/type-label.component'
 import toFirstLetterUpperCase from '../../../helpers/text.helper'
 import { fetchImage } from '../../../helpers/pokemon.helper'
-import DetailsWrapper from '../../global/wrapper/detail-wrapper.component'
+import DetailsLayout from '../../global/layouts/details-layout.component'
 import PageLoader from '../../global/loaders/page-loader.component'
 
 interface PokemonDetailsComponentProps {
@@ -31,7 +31,7 @@ export default function PokemonDetailsComponent({
     }
 
     return (
-        <DetailsWrapper
+        <DetailsLayout
             gradientColors={POKE_TYPES.GRADIENTS[pokemon.types[0].name]}
         >
             <Image
@@ -60,7 +60,7 @@ export default function PokemonDetailsComponent({
                     .join(' ')}
             </Text>
             {children}
-        </DetailsWrapper>
+        </DetailsLayout>
     )
 }
 

@@ -2,13 +2,12 @@ import React from 'react'
 import { COLORS } from '../../../style/color.style'
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { FONT_SIZES } from '../../../style/size.style'
 interface DetailsWrapper {
     children: React.ReactNode
     gradientColors: string[]
 }
 
-export default function DetailsWrapper({
+export default function DetailsLayout({
     children,
     gradientColors,
 }: DetailsWrapper) {

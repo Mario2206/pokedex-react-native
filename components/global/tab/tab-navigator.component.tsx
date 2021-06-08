@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleProp, StyleSheet, View } from 'react-native'
+import { StyleProp, View } from 'react-native'
 import BulletNav from '../nav/bullet-nav.component'
 
 interface TabNavigatorProps {

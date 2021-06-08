@@ -3,7 +3,7 @@ import {
     getPokemonFromState,
 } from '../../redux/selectors/pokemon.selector'
 import { useAppDispatch } from '../../redux/hooks'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import {
     clearPokemonState,
     loading,
@@ -39,9 +39,9 @@ export default function usePokemonDetails({
 
     useEffect(() => {
         dispatch(loading())
-        new PokemonService(Languages.FR)
-            .get(basePokemon.url)
+        PokemonService.get(basePokemon.url)
             .then((pokemon) => {
+                console.log(pokemon.evolutionChain)
                 dispatch(setPokemonState(pokemon))
             })
             .catch((e) => {
@@ -55,13 +55,12 @@ export default function usePokemonDetails({
 
     const fetchPokemonMove = async () => {
         if (pokemon && !moves) {
-            addMoves(Languages.FR)(pokemon).then((newPokemon) => {
-                /*  console.log({ newPokemon: newPokemon.moves })*/
-                const sortmoves = [...newPokemon.moves].sort(
+            addMoves(pokemon).then((newPokemon) => {
+                const sortedMoves = [...newPokemon.moves].sort(
                     (move1, move2) => move1.level - move2.level
                 )
 
-                dispatch(setMovesState(sortmoves))
+                dispatch(setMovesState(sortedMoves))
             })
         }
     }

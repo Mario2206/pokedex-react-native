@@ -33,55 +33,50 @@ export function convertToPokemonModel(data: Record<string, any>): PokemonModel {
     return { ...preview, stats: data.stats }
 }
 
-export function convertToPokemonTypeModel(language: Languages) {
-    return (data: Record<string, any>) => {
-        return {
-            url: data.url,
-            name: data.name,
-            display_name: filterByLang(language, data.names)[0].name,
-        }
+export function convertToPokemonTypeModel(data: Record<string, any>) {
+    return {
+        url: data.url,
+        name: data.name,
+        display_name: filterByLang(Languages.FR, data.names)[0].name,
     }
 }
 
-export function convertToPokemonSpeciesModel(language: Languages) {
-    return (data: Record<string, any>) => {
-        return {
-            id: data.id,
-            names: filterByLang(language, data.names),
-            flavor_text_entries: filterByLang(
-                language,
-                data.flavor_text_entries
-            ),
-            url: data.url,
-            evolutionChain: {
-                url: data.evolution_chain.url,
+export function convertToPokemonSpeciesModel(data: Record<string, any>) {
+    return {
+        id: data.id,
+        names: filterByLang(Languages.FR, data.names),
+        flavor_text_entries: filterByLang(
+            Languages.FR,
+            data.flavor_text_entries
+        ),
+        url: data.url,
+        evolutionChain: {
+            url: data.evolution_chain.url,
+        },
+    }
+}
+
+export function convertToEvolutionChainModel(
+    chain: Record<string, any>
+): EvolutionChain[] {
+    const evolutions: EvolutionChain[] = []
+
+    while (chain) {
+        evolutions.push({
+            id: chain.id,
+            species: {
+                url: chain.species.url,
+                names: [],
+                flavor_text_entries: [],
+                id: '',
             },
-        }
+            evolutionDetails: {
+                minLevel: chain.evolution_details.minLevel,
+            },
+        })
+
+        chain = chain.evolves_to[0]
     }
-}
 
-export function convertToEvolutionChainModel(language: Languages) {
-    return (data: Record<string, any>): EvolutionChain[] => {
-        const evolutions: EvolutionChain[] = []
-        let chain = data.chain
-
-        while (chain) {
-            evolutions.push({
-                id: data.id,
-                species: {
-                    url: chain.species.url,
-                    names: [],
-                    flavor_text_entries: [],
-                    id: '',
-                },
-                evolutionDetails: {
-                    minLevel: chain.evolution_details.minLevel,
-                },
-            })
-
-            chain = chain.evolves_to[0]
-        }
-
-        return evolutions
-    }
+    return evolutions
 }
